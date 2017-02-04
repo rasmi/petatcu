@@ -1,25 +1,21 @@
 var app = angular.module('petatcu', ['firebase', 'ui.bootstrap']).constant('_', window._);
 
 app
-/*.directive('pet', function() {
-    return {
-        restrict: 'E',
-        replace: 'true',
-        template: ''
-    }
-})*/
 .controller('homeCtrl', ['$scope', '$firebaseObject', '$firebaseArray', '$firebaseAuth', '_',
 function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
     var ref = firebase.database().ref();
-    var petsRef = $firebaseArray(ref.child('pets'));
-    var usersRef = $firebaseArray(ref.child('users'));
+    var storageRef = firebase.storage().ref();
+    var petsRef = ref.child('pets');
+    var usersRef = ref.child('users');
     var obj = $firebaseObject(ref);
 
     $scope.auth = $firebaseAuth();
 
     var fetchData = function() {
-        petsRef.$loaded().then(function(data) {
+        $firebaseArray(petsRef).$loaded().then(function(data) {
             $scope.pets = data;
+            $scope.filterPets($scope.pets);
+            console.log($scope.pets);
         });
     }
     fetchData();
@@ -61,13 +57,33 @@ function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
 
     $scope.submitNewPet = function() {
         $scope.pets.$add($scope.newPet).then(function(data){
-            fetchData();
-            $scope.filterPets($scope.pets);
+            console.log(data.key);
+            function guid() {
+                function s4() {return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);}
+                return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+            }
+
+            var f = document.getElementById('newPetPhoto').files[0];
+            var metadata = { 'contentType': f.type };
+            storageRef.child('images/' +guid()+'.'+f.name.split('.').pop()).put(f, metadata)
+            .then(function(image) {
+                petsRef.child(data.key).child('photoUrl').set(image.downloadURL).then(
+                    function() {
+                        fetchData();
+                        $scope.addingPet = false;
+                    });
+            });
         });
-        $scope.addingPet = false;
     }
 
     $scope.favoritePet = function() {
         console.log('FAVORITE PET');
     }
-}]);
+}])
+.directive('pet', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'views/pet.html',
+        scope: {pet: '='}
+    };
+});

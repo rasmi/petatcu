@@ -10,11 +10,12 @@
             <label class='btn btn-default' ng-model='newPet.type' uib-btn-radio="'dog'">Dog</label>
         </div>
     </div>
-    <!--<div class='form-group'>
+    <div class='form-group'>
         <label class='btn btn-default' for='newPetPhoto'>
-        <input id='newPetPhoto' type='file' style='display:none;' onchange="$('#upload-file-info').html($(this).val());" required />
+        <input id='newPetPhoto' type='file' name='file' style='display:none;' onchange="$('#upload-file-info').html($(this).val());" required />
             Photo
         </label>
-    </div>-->
+        <span class='label label-info' id='upload-file-info'></span>
+    </div>
     <button ng-disabled='newPetForm.$invalid' class='btn btn-primary' ng-click='submitNewPet()'>Submit</button>
 </form>
