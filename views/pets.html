@@ -3,7 +3,7 @@
 
 <div ng-if='myPets'>
     <h2>My Pets</h2>
-    <pet ng-repeat='pet in myPets' pet='pet'></pet>
+    <pet ng-repeat='pet in myPets' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
 </div>
 
 <div ng-if='!favorites'>
@@ -11,10 +11,10 @@
 </div>
 <div ng-if='favorites'>
     <h2>My Favorite Pets</h2>
-    <pet ng-repeat='pet in favorites' pet='pet'></pet>
+    <pet ng-repeat='pet in favorites' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
 </div>
 
 <div ng-if='pets'>
     <h2>All Pets</h2>
-    <pet ng-repeat='pet in pets' pet='pet'></pet>
+    <pet ng-repeat='pet in pets' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
 </div>

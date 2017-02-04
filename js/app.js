@@ -76,14 +76,33 @@ function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
         });
     }
 
-    $scope.favoritePet = function() {
-        console.log('FAVORITE PET');
+    $scope.isfavorite = function(pet) {
+        return pet.favorited_by && pet.favorited_by[$scope.user.uid];
+    }
+
+    $scope.favorite = function(pet) {
+        petsRef.child(pet.$id).child('favorited_by').child($scope.user.uid).set('true');
+        fetchData();
+    }
+
+    $scope.unfavorite = function(pet) {
+        console.log(pet);
+        petsRef.child(pet.$id).child('favorited_by').child($scope.user.uid).remove();
+        fetchData();
+    }
+
+    $scope.togglefavorite = function(pet) {
+        if ($scope.isfavorite(pet)) {
+            $scope.unfavorite(pet);
+        } else {
+            $scope.favorite(pet);
+        }
     }
 }])
 .directive('pet', function() {
     return {
         restrict: 'E',
         templateUrl: 'views/pet.html',
-        scope: {pet: '='}
+        scope: {pet: '=', favorite: '&', unfavorite: '&', isfavorite: '&', togglefavorite: '&'}
     };
 });

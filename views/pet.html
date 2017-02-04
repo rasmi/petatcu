@@ -2,5 +2,9 @@
     <div class='pet-photo'>
         <img ng-src='{{pet.photoUrl}}' class='img-fluid img-thumbnail'>
     </div>
-<div>{{pet.name}}</div>
+<div>
+    {{pet.name}}
+    <span ng-click='togglefavorite(pet)' class='glyphicon' ng-class="isfavorite(pet) ? 'glyphicon-heart' : 'glyphicon-heart-empty'"></span>
+</div>
+
 </div>
