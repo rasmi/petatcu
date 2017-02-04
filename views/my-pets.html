@@ -1,9 +1,15 @@
 <button ng-if='!addingPet' type='button' class='btn btn-default' ng-click='addMyPet()'>Add my pet!</button>
+<div ng-if='addingPet' ng-include src="'views/addPet.html'"></div>
+
 <div ng-if='myPets'>
     <h2>My Pets</h2>
     <div ng-repeat='pet in myPets'>
         {{pet.name}}
     </div>
+</div>
+
+<div ng-if='!favorites'>
+    Oh no, you don't have any favorite pets! Find some below.
 </div>
 <div ng-if='favorites'>
     <h2>My Favorite Pets</h2>
@@ -11,25 +17,7 @@
         {{pet.name}}
     </div>
 </div>
-<div ng-if='addingPet'>
-    <h2>Add my pet!</h2>
-    <form name='newPetForm'>
-        <div class='form-group'>
-          <label for='newPetName'>Name:</label>
-          <input type='text' class='form-control' ng-model='newPet.name' placeholder='Doggo' id='newPetName' required />
-        </div>
-        <div class='form-group'>
-            <div class='btn-group' id='newPetType'>
-                <label class='btn btn-default' ng-model='newPet.type' uib-btn-radio="'cat'">Cat</label>
-                <label class='btn btn-default' ng-model='newPet.type' uib-btn-radio="'dog'">Dog</label>
-            </div>
-        </div>
-        <!--<div class='form-group'>
-            <label class='btn btn-default' for='newPetPhoto'>
-            <input id='newPetPhoto' type='file' style='display:none;' onchange="$('#upload-file-info').html($(this).val());" required />
-                Photo
-            </label>
-        </div>-->
-        <button ng-disabled='newPetForm.$invalid' class='btn btn-primary' ng-click='submitNewPet()'>Submit</button>
-    </form>
+
+<div ng-if='pets'>
+    <h2>All Pets</h2>
 </div>

@@ -1,6 +1,14 @@
 var app = angular.module('petatcu', ['firebase', 'ui.bootstrap']).constant('_', window._);
 
-app.controller('homeCtrl', ['$scope', '$firebaseObject', '$firebaseArray', '$firebaseAuth', '_',
+app
+/*.directive('pet', function() {
+    return {
+        restrict: 'E',
+        replace: 'true',
+        template: ''
+    }
+})*/
+.controller('homeCtrl', ['$scope', '$firebaseObject', '$firebaseArray', '$firebaseAuth', '_',
 function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
     var ref = firebase.database().ref();
     var petsRef = $firebaseArray(ref.child('pets'));
@@ -9,10 +17,12 @@ function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
 
     $scope.auth = $firebaseAuth();
 
-    petsRef.$loaded().then(function(data) {
-        $scope.pets = data;
-        console.log($scope.pets);
-    });
+    var fetchData = function() {
+        petsRef.$loaded().then(function(data) {
+            $scope.pets = data;
+        });
+    }
+    fetchData();
 
     $scope.signIn = function() {
         $scope.auth.$signInWithPopup('facebook').then(function(result) {
@@ -50,7 +60,10 @@ function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
     }
 
     $scope.submitNewPet = function() {
-        $scope.pets.$add($scope.newPet);
+        $scope.pets.$add($scope.newPet).then(function(data){
+            fetchData();
+            $scope.filterPets($scope.pets);
+        });
         $scope.addingPet = false;
     }
 
