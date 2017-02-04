@@ -1,8 +1,21 @@
-.profpic {
-    max-width: 50px;
+.logo {
+    max-height: 75px;
+    float: left;
+}
+.signin {
     float: right;
+}
+.user-details {
     vertical-align: top;
+    float: right;
+}
+.profpic {
+    max-width: 50px !important;
+    float: right;
 }
 .heart {
     color: red;
+}
+.add-pet {
+    float: center;
 }

@@ -30,17 +30,17 @@
 <body ng-controller='homeCtrl'>
     <div class='container-fluid'>
         <div class='row'>
+            <img class='logo img-fluid' src='img/petatcu.png'>
             <div ng-if='!user'>
-                <button type='button' class='btn btn-default' ng-click='signIn()'>Sign In!</button>
+                <button type='button' class='signin btn btn-default' ng-click='signIn()'>Sign In!</button>
             </div>
-            <div ng-if='user'>
-                <div>
-                    <img class='profpic' ng-src='{{user.photoURL}}'>
-                    <h3>Welcome, {{user.displayName}}!</h3>
-                </div>
-                <br />
-                <div ng-include src="'views/pets.html'"></div>
+            <div class='user-details' ng-if='user'>
+                <img class='profpic img-thumbnail' ng-src='{{user.photoURL}}'>
+                <br />&nbsp;
+                <h3>Welcome, {{user.displayName}}!</h3>
             </div>
+        </div>
+        <div ng-if='user' class='row' ng-include src="'views/pets.html'">
         </div>
     </div>
 </body>

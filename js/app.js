@@ -1,7 +1,6 @@
 var app = angular.module('petatcu', ['firebase', 'ui.bootstrap']).constant('_', window._);
 
-app
-.controller('homeCtrl', ['$scope', '$firebaseObject', '$firebaseArray', '$firebaseAuth', '_',
+app.controller('homeCtrl', ['$scope', '$firebaseObject', '$firebaseArray', '$firebaseAuth', '_',
 function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
     var ref = firebase.database().ref();
     var storageRef = firebase.storage().ref();
@@ -99,7 +98,7 @@ function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
             $scope.favorite(pet);
         }
     }
-    
+
     $scope.active = 0;
     $scope.resetTab = function() {
         $scope.active = 0;

@@ -21,17 +21,17 @@
         </div>
     </uib-tab>
     <uib-tab index='2' heading='My Pets' template-url='views/tab.html'>
-        <button ng-if='!addingPet' type='button' class='btn btn-default' ng-click='addMyPet()'>Add my pet!</button>
-        <div ng-if='addingPet' ng-include src="'views/addPet.html'"></div>
-        <div>
+        <div class='row text-center'>
+            <button ng-if='!addingPet' type='button' class='add-pet btn btn-default' ng-click='addMyPet()'>Add my pet!</button>
+            <div ng-if='addingPet' ng-include src="'views/addPet.html'"></div>
             <div class='text-center' ng-if='!myPets.length'>
                 It's okay if you don't have any pets. Let's find some new furry friends!
             </div>
-            <div class='row'>
-                <div ng-repeat='pet in myPets'>
-                    <div class='clearfix' ng-if='$index % 4 == 0'></div>
-                    <pet class='col-sm-3' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
-                </div>
+        </div>
+        <div class='row'>
+            <div ng-repeat='pet in myPets'>
+                <div class='clearfix' ng-if='$index % 4 == 0'></div>
+                <pet class='col-sm-3' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
             </div>
         </div>
     </uib-tab>
