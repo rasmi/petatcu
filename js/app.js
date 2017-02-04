@@ -51,6 +51,7 @@ function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
             'type': 'dog',
             'human': $scope.user.uid,
             'human_fbid': $scope.user.providerData[0].uid,
+            'human_email': $scope.user.email,
             'favorited_by': favorited_by
         }
     }
