@@ -26,16 +26,20 @@
     <script src='js/app.js'></script>
 </head>
 <body ng-controller='homeCtrl'>
-    <div ng-if='!user'>
-        <button type='button' class='btn btn-default' ng-click='signIn()'>Sign In!</button>
-    </div>
-    <div ng-if='user'>
-        <div>
-            <img class='profpic' ng-src='{{user.photoURL}}'>
-            <h3>Welcome, {{user.displayName}}!</h3>
+    <div class='container-fluid'>
+        <div class='row'>
+            <div ng-if='!user'>
+                <button type='button' class='btn btn-default' ng-click='signIn()'>Sign In!</button>
+            </div>
+            <div ng-if='user'>
+                <div>
+                    <img class='profpic' ng-src='{{user.photoURL}}'>
+                    <h3>Welcome, {{user.displayName}}!</h3>
+                </div>
+                <br />
+                <div ng-include src="'views/pets.html'"></div>
+            </div>
         </div>
-        <br />
-        <div ng-include src="'views/pets.html'"></div>
     </div>
 </body>
 </html>
