@@ -9,7 +9,6 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js'></script>
     <script src='https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js'></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js'></script>
     <script src='https://www.gstatic.com/firebasejs/3.6.8/firebase.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
@@ -31,8 +30,11 @@
         <button type='button' class='btn btn-default' ng-click='signIn()'>Sign In!</button>
     </div>
     <div ng-if='user'>
-        <h2>Welcome, {{user.displayName}}!</h2>
-        <img ng-src='{{user.photoURL}}'>
+        <div>
+            <img class='profpic' ng-src='{{user.photoURL}}'>
+            <h3>Welcome, {{user.displayName}}!</h3>
+        </div>
+        <br />
         <div ng-include src="'views/pets.html'"></div>
     </div>
 </body>

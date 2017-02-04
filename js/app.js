@@ -99,6 +99,11 @@ function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
             $scope.favorite(pet);
         }
     }
+    
+    $scope.active = 0;
+    $scope.resetTab = function() {
+        $scope.active = 0;
+    }
 }])
 .directive('pet', function() {
     return {

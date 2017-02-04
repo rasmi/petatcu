@@ -1,20 +1,41 @@
-<button ng-if='!addingPet' type='button' class='btn btn-default' ng-click='addMyPet()'>Add my pet!</button>
-<div ng-if='addingPet' ng-include src="'views/addPet.html'"></div>
+<uib-tabset active='active' justified='true' vertical='false' template-url='views/tabset.html'>
+    <uib-tab index='0' heading='All Pets' template-url='views/tab.html'>
+        <div class='row'>
+            <div ng-repeat='pet in pets'>
+                <div class='clearfix' ng-if='$index % 4 == 0'></div>
+                <pet class='col-sm-3' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
+            </div>
+        </div>
+    </uib-tab>
+    <uib-tab index='1' heading='Favorites' template-url='views/tab.html'>
+        <div>
+            <div class='text-center' ng-if='!favorites.length'>
+                Oh no, you don't have any favorite pets! Let's find some!
+            </div>
+            <div class='row'>
+                <div ng-repeat='pet in favorites'>
+                    <div class='clearfix' ng-if='$index % 4 == 0'></div>
+                    <pet class='col-sm-3' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+    <uib-tab index='2' heading='My Pets' template-url='views/tab.html'>
+        <button ng-if='!addingPet' type='button' class='btn btn-default' ng-click='addMyPet()'>Add my pet!</button>
+        <div ng-if='addingPet' ng-include src="'views/addPet.html'"></div>
+        <div>
+            <div class='text-center' ng-if='!myPets.length'>
+                It's okay if you don't have any pets. Let's find some new furry friends!
+            </div>
+            <div class='row'>
+                <div ng-repeat='pet in myPets'>
+                    <div class='clearfix' ng-if='$index % 4 == 0'></div>
+                    <pet class='col-sm-3' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+</uib-tabset>
 
-<div ng-if='myPets'>
-    <h2>My Pets</h2>
-    <pet ng-repeat='pet in myPets' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
-</div>
 
-<div ng-if='!favorites'>
-    Oh no, you don't have any favorite pets! Find some below.
-</div>
-<div ng-if='favorites'>
-    <h2>My Favorite Pets</h2>
-    <pet ng-repeat='pet in favorites' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
-</div>
 
-<div ng-if='pets'>
-    <h2>All Pets</h2>
-    <pet ng-repeat='pet in pets' pet='pet' isfavorite='isfavorite(pet)' togglefavorite='togglefavorite(pet)'></pet>
-</div>
