@@ -10,6 +10,13 @@ function($scope, $firebaseObject, $firebaseArray, $firebaseAuth, _) {
 
     $scope.auth = $firebaseAuth();
 
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            $scope.user = user;
+            fetchData();
+        }
+    });
+
     var fetchData = function() {
         $firebaseArray(petsRef).$loaded().then(function(data) {
             $scope.pets = data;
